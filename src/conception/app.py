@@ -1,6 +1,5 @@
 import streamlit as st
 from src.conception.constants import MODEL_ID
-from sentence_transformers.util import semantic_search
 
 from src.conception.utils import get_embeddings, query_hugging_face
 
@@ -15,8 +14,8 @@ def app():
 
     query_embedding = query_hugging_face([query], MODEL_ID)
 
-    hits = semantic_search(query_embedding, english_embeddings, top_k=5)
-    st.write(hits)
+    #hits = semantic_search(query_embedding, english_embeddings, top_k=5)
+    #st.write(hits)
 
 
     # Still need to compute the cosine similarity

@@ -7,7 +7,7 @@ from english_words import get_english_words_set
 from src.conception.constants import MODEL_ID
 
 
-def query_hugging_face(texts: list[str], model_id: str):
+def query_hugging_face(texts: list[str], model_id: str) -> dict:
     """Query Hugging Face API for feature extraction."""
     api_url, headers = get_api_urls_and_headers(model_id)
     response = requests.post(api_url, headers=headers, json={"inputs": texts, "options": {"wait_for_model": True}})
