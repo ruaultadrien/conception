@@ -23,6 +23,7 @@ chromadb = "^0.4.15"
 
 [tool.poetry.group.dev.dependencies]
 ipykernel = "^6.25.2"
+pytest = "^7.4.3"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
