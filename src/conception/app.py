@@ -1,23 +1,30 @@
+"""Streamlit app declaration."""
+import os
+
 import streamlit as st
-from src.conception.constants import MODEL_ID
+from english_words import get_english_words_set
+from langchain.embeddings import HuggingFaceInferenceAPIEmbeddings
+from langchain.vectorstores.chroma import Chroma
 
-from src.conception.utils import get_embeddings, query_hugging_face
 
-def app():
+def app() -> None:
+    """Streamlit app."""
     st.title("Conception")
 
     # Input text with streamlit
-    query = st.text_input("Enter a word to explore...")
+    query_word = st.text_input("Enter a word to explore...")
 
-    # get english words
-    english_embeddings = get_embeddings()
+    english_words = list(get_english_words_set(sources=["web2"]))
+    english_words = english_words[:10000]
 
-    query_embedding = query_hugging_face([query], MODEL_ID)
+    embeddings_model = HuggingFaceInferenceAPIEmbeddings(
+        # api_key=inference_api_key,
+        api_key=os.getenv("HUGGINGFACEHUB_API_TOKEN"),
+        model_name="sentence-transformers/all-MiniLM-l6-v2",
+    )
+    db = Chroma.from_texts(english_words, embeddings_model)
 
-    #hits = semantic_search(query_embedding, english_embeddings, top_k=5)
-    #st.write(hits)
+    res = db.similarity_search(query_word, k=5)
 
-
-    # Still need to compute the cosine similarity
-    # between the query embedding and the embeddings
-    # using the hugging face semantic function
+    most_similar_words = [r.page_content for r in res]
+    st.write(most_similar_words)

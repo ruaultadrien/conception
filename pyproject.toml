@@ -9,11 +9,15 @@ authors = ["Adrien Ruault <ruaultadrien@gmail.com>"]
 [tool.poetry.dependencies]
 python = "^3.10"
 streamlit = "^1.26.0"
-visiumlint = "^0.0.1"
+visiumlint = ">=0.14"
 requests = "^2.31.0"
 python-dotenv = "^1.0.0"
 english-words = "^2.0.1"
 python-openstackclient = "^6.3.0"
+langchain = "^0.0.325"
+huggingface-hub = "<0.17.0"
+sentence-transformers = "^2.2.2"
+chromadb = "^0.4.15"
 
 [tool.poetry.dev-dependencies]
 
