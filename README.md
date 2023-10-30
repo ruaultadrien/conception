@@ -5,5 +5,6 @@
 ```bash
 poetry install
 poetry shell
-streamlit run app.py
+cd front
+streamlit run front/main.py
 ```

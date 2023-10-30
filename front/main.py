@@ -2,7 +2,7 @@
 
 import logging
 
-from src.conception.app import app
+from front.app import app
 
 logging.getLogger().setLevel(logging.INFO)
 
