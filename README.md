@@ -2,9 +2,9 @@
 
 ## Run the application locally
 
+Set the HUGGINGFACEHUB_API_TOKEN in a .env file then boom.
+
 ```bash
-poetry install
-poetry shell
-cd front
-streamlit run front/main.py
+echo "HUGGINGFACEHUB_API_TOKEN=''" > .env
+docker-compose up
 ```

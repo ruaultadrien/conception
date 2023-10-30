@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "front"
+version = "0.1.0"
+description = "Streamlit frontend"
+authors = ["Adrien Ruault <ar@visium.ch>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+streamlit = "^1.26.0"
+requests = "^2.31.0"
+python-dotenv = "^1.0.0"
+english-words = "^2.0.1"
+python-openstackclient = "^6.3.0"
+langchain = "^0.0.325"
+huggingface-hub = "<0.17.0"
+sentence-transformers = "^2.2.2"
+chromadb = "^0.4.15"
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.25.2"
+pytest = "^7.4.3"
+visiumlint = ">=0.14"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
