@@ -9,3 +9,8 @@ services:
       - 8501:8501
     environment:
       - HUGGINGFACEHUB_API_TOKEN=${HUGGINGFACEHUB_API_TOKEN}
+
+  chroma:
+    image: chromadb/chroma:latest
+    ports:
+      - 8000:8000
