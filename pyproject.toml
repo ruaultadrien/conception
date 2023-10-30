@@ -9,7 +9,6 @@ authors = ["Adrien Ruault <ruaultadrien@gmail.com>"]
 [tool.poetry.dependencies]
 python = "^3.10"
 streamlit = "^1.26.0"
-visiumlint = ">=0.14"
 requests = "^2.31.0"
 python-dotenv = "^1.0.0"
 english-words = "^2.0.1"
@@ -24,6 +23,7 @@ chromadb = "^0.4.15"
 [tool.poetry.group.dev.dependencies]
 ipykernel = "^6.25.2"
 pytest = "^7.4.3"
+visiumlint = ">=0.14"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
