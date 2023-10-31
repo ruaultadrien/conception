@@ -1,17 +1,12 @@
 """Streamlit app declaration."""
-import os
-
-import streamlit as st
-import uuid
 import logging
-import numpy as np
-from english_words import get_english_words_set
-from langchain.embeddings import HuggingFaceInferenceAPIEmbeddings
-from langchain.vectorstores.chroma import Chroma
-from chromadb.utils import embedding_functions
-
+import os
+import uuid
 
 import chromadb
+import streamlit as st
+from chromadb.utils import embedding_functions
+from english_words import get_english_words_set
 
 
 def app() -> None:
