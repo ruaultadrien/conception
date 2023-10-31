@@ -1,10 +1,12 @@
 """Streamlit app declaration."""
+import logging
 import os
+import uuid
 
+import chromadb
 import streamlit as st
+from chromadb.utils import embedding_functions
 from english_words import get_english_words_set
-from langchain.embeddings import HuggingFaceInferenceAPIEmbeddings
-from langchain.vectorstores.chroma import Chroma
 
 
 def app() -> None:
@@ -17,14 +19,23 @@ def app() -> None:
     english_words = list(get_english_words_set(sources=["web2"]))
     english_words = english_words[:10000]
 
-    embeddings_model = HuggingFaceInferenceAPIEmbeddings(
+    embeddings_model = embedding_functions.HuggingFaceEmbeddingFunction(
         # api_key=inference_api_key,
         api_key=os.getenv("HUGGINGFACEHUB_API_TOKEN"),
         model_name="sentence-transformers/all-MiniLM-l6-v2",
     )
-    db = Chroma.from_texts(english_words, embeddings_model)
+    chroma_client = chromadb.HttpClient(host="chroma", port=8000)
 
-    res = db.similarity_search(query_word, k=5)
+    logging.info("Creating collection")
+    collection = chroma_client.get_or_create_collection("english_words", embedding_function=embeddings_model)
 
-    most_similar_words = [r.page_content for r in res]
-    st.write(most_similar_words)
+    logging.info("Adding documents to collection")
+    collection.add(
+        documents=english_words,
+        ids=[str(uuid.uuid4()) for _ in range(len(english_words))],
+    )
+
+    logging.info("Querying collection")
+    res = collection.query(query_texts=[query_word], n_results=5)
+
+    st.write(res)
