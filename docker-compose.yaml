@@ -4,9 +4,16 @@ services:
   front:
     build: ./front
     volumes:
-      - ./front:/app
+      - ./front:/front
     ports:
       - 8501:8501
+
+  backend:
+    build: ./backend
+    volumes:
+      - ./backend:/backend
+    ports:
+      - 8888:8888
     environment:
       - HUGGINGFACEHUB_API_TOKEN=${HUGGINGFACEHUB_API_TOKEN}
 
