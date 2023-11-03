@@ -1,14 +1,12 @@
 """Main module for the backend FastAPI application."""
 import logging
 import os
-import uuid
 
 import chromadb
 from chromadb.utils import embedding_functions
 from fastapi import FastAPI
 from pydantic import BaseModel
 from src.constants import N_WORDS
-
 from src.utils import get_english_words
 
 logging.getLogger().setLevel(logging.INFO)
@@ -30,6 +28,7 @@ class WordsResponse(BaseModel):
 
 @app.post("/most_similar_words", response_model=WordsResponse)
 def get_most_similar_words(word_request: WordRequest):
+    """Get the most similar words to a given word."""
     logging.info("Creating Chroma client...")
     chroma_client = chromadb.HttpClient(host="chroma", port=8000)
     collection = chroma_client.get_collection("english_words")
@@ -43,6 +42,7 @@ def get_most_similar_words(word_request: WordRequest):
 
 @app.post("/fill_chroma")
 def fill_chroma_with_all_english_words():
+    """Fill Chroma with all English words and their embeddings."""
     english_words = get_english_words()
     english_words = english_words[:N_WORDS]
 
