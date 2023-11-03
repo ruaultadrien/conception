@@ -1,9 +1,9 @@
 FROM python:3.11
 
-WORKDIR /app
+WORKDIR /front
 
-COPY poetry.lock /app
-COPY pyproject.toml /app
+COPY poetry.lock /front
+COPY pyproject.toml /front
 
 RUN python3 -m pip install --upgrade pip \
     && pip install poetry \
