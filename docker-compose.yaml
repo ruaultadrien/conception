@@ -1,23 +1,27 @@
 version: '3'
 
 services:
-  front:
-    build: ./front
-    volumes:
-      - ./front:/front
+  chroma:
+    image: chromadb/chroma:latest
     ports:
-      - 8501:8501
+      - 8000:8000
 
   backend:
     build: ./backend
     volumes:
       - ./backend:/backend
+    depends_on:
+      - chroma
     ports:
       - 8888:8888
     environment:
       - HUGGINGFACEHUB_API_TOKEN=${HUGGINGFACEHUB_API_TOKEN}
 
-  chroma:
-    image: chromadb/chroma:latest
+  front:
+    build: ./front
+    volumes:
+      - ./front:/front
+    depends_on:
+      - backend
     ports:
-      - 8000:8000
+      - 8501:8501

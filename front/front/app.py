@@ -11,10 +11,15 @@ def app() -> None:
     # Input text with streamlit
     query_word = st.text_input("Enter a word to explore...")
 
-    logging.info("Filling Chroma...")
-    requests.post("http://backend:8888/fill_chroma")
+    fill_chroma()
 
     logging.info("Querying collection...")
     res = requests.post("http://backend:8888/most_similar_words", json={"word": query_word})
 
-    st.write(res)
+    st.write(res.json())
+
+
+@st.cache_data
+def fill_chroma():
+    logging.info("Filling Chroma...")
+    requests.post("http://backend:8888/fill_chroma")

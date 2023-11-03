@@ -7,6 +7,7 @@ import chromadb
 from chromadb.utils import embedding_functions
 from fastapi import FastAPI
 from pydantic import BaseModel
+from src.constants import N_WORDS
 
 from src.utils import get_english_words
 
@@ -31,16 +32,19 @@ class WordsResponse(BaseModel):
 def get_most_similar_words(word_request: WordRequest):
     logging.info("Creating Chroma client...")
     chroma_client = chromadb.HttpClient(host="chroma", port=8000)
-    collection = chroma_client.get_collection("english_words", embedding_function=embeddings_model)
+    collection = chroma_client.get_collection("english_words")
     res = collection.query(query_texts=[word_request.word], n_results=5)
+    documents = res["documents"]
 
-    return {"words": [res]}
+    print("yooo", documents[0])
+
+    return {"words": documents[0]}
 
 
 @app.post("/fill_chroma")
 def fill_chroma_with_all_english_words():
     english_words = get_english_words()
-    english_words = english_words[:10000]
+    english_words = english_words[:N_WORDS]
 
     embeddings_model = embedding_functions.HuggingFaceEmbeddingFunction(
         api_key=os.getenv("HUGGINGFACEHUB_API_TOKEN"),
@@ -56,6 +60,6 @@ def fill_chroma_with_all_english_words():
     logging.info("Adding documents to collection...")
     collection.add(
         documents=english_words,
-        ids=[str(uuid.uuid4()) for _ in range(len(english_words))],
+        ids=english_words,
     )
     return {"message": "Chroma filled"}
