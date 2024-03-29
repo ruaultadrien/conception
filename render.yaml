@@ -16,4 +16,7 @@ services:
     dockerContext: backend
     plan: free
 
-  
+  - name: chroma
+    type: web
+    runtime: docker
+    image: chromadb/chroma:latest
