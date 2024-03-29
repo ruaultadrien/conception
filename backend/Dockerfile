@@ -2,8 +2,9 @@ FROM python:3.11
 
 WORKDIR /backend
 
-COPY poetry.lock /backend/
-COPY pyproject.toml /backend/
+#COPY poetry.lock /backend/
+#COPY pyproject.toml /backend/
+COPY . /backend
 
 RUN python3 -m pip install --upgrade pip \
     && pip install poetry \
