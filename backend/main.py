@@ -52,7 +52,7 @@ def fill_chroma_with_all_english_words():
     )
 
     logging.info("Creating Chroma client...")
-    chroma_client = chromadb.HttpClient(host="chroma", port=8000)
+    chroma_client = chromadb.HttpClient(host=os.environ["CHROMA_HOST"], port=8000)
 
     logging.info("Creating collection...")
     collection = chroma_client.get_or_create_collection("english_words", embedding_function=embeddings_model)

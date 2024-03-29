@@ -16,6 +16,7 @@ services:
       - 8888:8888
     environment:
       - HUGGINGFACEHUB_API_TOKEN=${HUGGINGFACEHUB_API_TOKEN}
+      - CHROMA_HOST=http://chroma
 
   front:
     build: ./front
@@ -25,3 +26,5 @@ services:
       - backend
     ports:
       - 8501:8501
+    environment:
+      - BACKEND_HOST=http://backend
