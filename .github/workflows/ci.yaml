@@ -14,12 +14,6 @@ jobs:
       - name: Checkout the repository
         uses: actions/checkout@v3
 
-      
-      - name: Move to frontend directory
-        run: |
-          cd front
-        shell: bash
-        
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -27,6 +21,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+          cd front
           python -m pip install --upgrade pip
           pip install poetry
           poetry install
@@ -34,11 +29,13 @@ jobs:
       
       - name: Check Python Style with visiumlint
         run: |
+          cd front
           poetry run visiumlint
         shell: bash
       
       - name: Run tests
         run: |
+          cd front
           poetry run python -m pytest
         shell: bash
   
@@ -54,13 +51,10 @@ jobs:
         with:
           python-version: "3.11"
       
-      - name: Move to backend directory
-        run: |
-          cd backend
-        shell: bash
 
       - name: Install dependencies
         run: |
+          cd backend
           python -m pip install --upgrade pip
           pip install poetry
           poetry install
@@ -68,10 +62,12 @@ jobs:
       
       - name: Check Python Style with visiumlint
         run: |
+          cd backend
           poetry run visiumlint
         shell: bash
       
       - name: Run tests
         run: |
+          cd backend
           poetry run python -m pytest
         shell: bash
