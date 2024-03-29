@@ -16,6 +16,7 @@ langchain = "^0.0.325"
 huggingface-hub = "<0.17.0"
 sentence-transformers = "^2.2.2"
 chromadb = "^0.4.15"
+ruff = "^0.3.4"
 
 [tool.poetry.group.dev.dependencies]
 ipykernel = "^6.25.2"

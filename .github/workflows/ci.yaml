@@ -7,7 +7,42 @@ on:
     branches: [ main ]
 
 jobs:
-  ci:
+  ci-front:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+
+      
+      - name: Move to frontend directory
+        run: |
+          cd front
+        shell: bash
+        
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install poetry
+          poetry install
+        shell: bash
+      
+      - name: Check Python Style with visiumlint
+        run: |
+          poetry run visiumlint
+        shell: bash
+      
+      - name: Run tests
+        run: |
+          poetry run python -m pytest
+        shell: bash
+  
+  ci-back:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,9 +54,9 @@ jobs:
         with:
           python-version: "3.11"
       
-      - name: Move to frontend directory
+      - name: Move to backend directory
         run: |
-          cd front
+          cd backend
         shell: bash
 
       - name: Install dependencies

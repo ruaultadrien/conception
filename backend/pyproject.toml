@@ -12,6 +12,7 @@ chromadb = "^0.4.15"
 fastapi = "^0.104.1"
 pydantic = "^2.4.2"
 english-words = "^2.0.1"
+ruff = "^0.3.4"
 
 
 [build-system]
