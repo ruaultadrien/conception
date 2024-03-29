@@ -7,6 +7,12 @@ services:
     dockerfilePath: front/Dockerfile
     dockerContext: front
     plan: free
+    envVars:
+      - key: BACKEND_URL
+        fromService:
+          name: back
+          type: web
+          property: host
 
   - name: back
     type: web
@@ -16,4 +22,8 @@ services:
     dockerContext: backend
     plan: free
 
-  
+  - name: chroma
+    type: web
+    runtime: docker
+    image: chromadb/chroma:latest
+    plan: free
