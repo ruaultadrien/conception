@@ -1,0 +1,19 @@
+
+services:
+  - name: front
+    type: web
+    runtime: docker
+    repo: https://github.com/ruaultadrien/conception
+    dockerfilePath: front/Dockerfile
+    dockerContext: front
+    plan: free
+
+  - name: back
+    type: web
+    runtime: docker
+    repo: https://github.com/ruaultadrien/conception
+    dockerfilePath: backend/Dockerfile
+    dockerContext: backend
+    plan: free
+
+  

@@ -1,0 +1,15 @@
+repos:
+- repo: local
+  hooks:
+    - id: front
+      name: Frontend
+      entry: bash -c "cd front && poetry run ruff check && poetry run python -m pytest"
+      language: system
+      types: [python]
+    
+    - id: back
+      name: Backend
+      entry: bash -c "cd backend && poetry run ruff check && poetry run python -m pytest"
+      language: system
+      types: [python]
+

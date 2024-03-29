@@ -2,7 +2,7 @@
 
 import logging
 
-from front.app import app
+from src.app import app
 
 logging.getLogger().setLevel(logging.INFO)
 
