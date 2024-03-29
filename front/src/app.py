@@ -1,4 +1,5 @@
 """Streamlit app declaration."""
+import os
 
 import logging
 
@@ -18,7 +19,8 @@ def app() -> None:
     fill_chroma()
 
     logging.info("Querying collection...")
-    res = requests.post("http://backend:8888/most_similar_words", json={"word": query_word}, timeout=60)
+    #res = requests.post("http://backend:8888/most_similar_words", json={"word": query_word}, timeout=60)
+    res = requests.post(f"{os.environ['BACKEND_HOST']}:8888/most_similar_words", json={"word": query_word}, timeout=60)
 
     st.write(res.json())
 
@@ -27,4 +29,4 @@ def app() -> None:
 def fill_chroma():
     """Fill Chroma with all English words and their embeddings."""
     logging.info("Filling Chroma...")
-    requests.post("http://backend:8888/fill_chroma", timeout=3600)
+    requests.post(f"{os.environ['BACKEND_HOST']}:8888/fill_chroma", timeout=3600)
