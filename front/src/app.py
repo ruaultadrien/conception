@@ -12,6 +12,8 @@ def app() -> None:
     # Input text with streamlit
     query_word = st.text_input("Enter a word to explore...")
 
+    st.info("We only use a subset of the English dictionnary so far, results might not be of good quality.")
+
     fill_chroma()
 
     logging.info("Querying collection...")
