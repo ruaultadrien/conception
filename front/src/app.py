@@ -1,4 +1,5 @@
 """Streamlit app declaration."""
+
 import logging
 
 import requests

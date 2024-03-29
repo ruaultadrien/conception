@@ -30,7 +30,7 @@ jobs:
       - name: Check Python Style with visiumlint
         run: |
           cd front
-          poetry run visiumlint
+          poetry run ruff check
         shell: bash
       
       - name: Run tests
@@ -80,7 +80,7 @@ jobs:
       - name: Check Python Style with visiumlint
         run: |
           cd backend
-          poetry run visiumlint
+          poetry run ruff check
         shell: bash
       
       - name: Run tests

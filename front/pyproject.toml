@@ -21,8 +21,10 @@ ruff = "^0.3.4"
 [tool.poetry.group.dev.dependencies]
 ipykernel = "^6.25.2"
 pytest = "^7.4.3"
-visiumlint = ">=0.14"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 120
