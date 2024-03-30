@@ -22,11 +22,6 @@ services:
     dockerContext: backend
     plan: free
     envVars:
-      #- key: CHROMA_HOST
-        #fromService:
-          #name: chroma
-          #type: web
-          #property: host
       - key: CHROMA_HOST
         fromService:
           name: chroma

@@ -16,6 +16,13 @@ def get_english_words() -> list:
 
 def get_vector_db_chroma_client() -> chromadb.api.ClientAPI:
     """Get a Chroma client for the vector database."""
+    use_ssl = os.environ.get("RENDER", False)
     return chromadb.HttpClient(
-        host=os.environ["CHROMA_HOST"], port=8000, settings=chromadb.config.Settings(anonymized_telemetry=False)
+        host=os.environ["CHROMA_HOST"], port=8000, settings=chromadb.config.Settings(anonymized_telemetry=False), ssl=use_ssl
     )
+
+def resolve_url_from_environment(host):
+    if os.environ.get("RENDER", False):
+        return f"https://{host}"
+    else:
+        return f"http://{host}"
