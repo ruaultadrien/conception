@@ -29,4 +29,4 @@ def app() -> None:
 def fill_chroma():
     """Fill Chroma with all English words and their embeddings."""
     logging.info("Filling Chroma...")
-    requests.post(f"{os.environ['BACKEND_HOST']}:8888/fill_chroma", timeout=3600)
+    requests.post(f"{os.environ['BACKEND_HOST']}:8888/fill_vector_db", timeout=3600)
