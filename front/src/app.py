@@ -6,6 +6,7 @@ import os
 import requests
 import streamlit as st
 
+from src.utils import resolve_url_from_environment
 from src.containers.query_most_similar_words import query_most_similar_words_container
 from src.containers.vector_db import vector_db_container
 
@@ -16,7 +17,8 @@ def app() -> None:
     st.header("Vector Database state")
 
     # health check on the vector database
-    res = requests.get(f"http://{os.environ['BACKEND_HOST']}:8888/vector_db_health")
+    backend_url = resolve_url_from_environment(os.environ["BACKEND_HOST"])
+    res = requests.get(f"{backend_url}:8888/vector_db_health")
     vector_db_is_up = res.json()["vector_db_is_up"]
     if vector_db_is_up:
         st.write("Vector database is up.")

@@ -1,5 +1,6 @@
 """Main module for the backend FastAPI application."""
 
+from http.client import HTTPException
 import logging
 import os
 
@@ -71,6 +72,11 @@ def post_vector_db():
 def get_vector_db():
     """Get the collection's documents."""
     logging.info("Creating Chroma client...")
+    vector_db_is_up = get_vector_db_health()["vector_db_is_up"]
+    
+    if not vector_db_is_up:
+        raise HTTPException(status_code=500, detail="Vector database is down.")
+
     chroma_client = get_vector_db_chroma_client()
     collection = chroma_client.get_collection("english_words")
     return {"documents": collection.get()}
