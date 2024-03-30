@@ -1,4 +1,5 @@
 """Main module for the backend FastAPI application."""
+
 import logging
 import os
 
@@ -6,6 +7,7 @@ import chromadb
 from chromadb.utils import embedding_functions
 from fastapi import FastAPI
 from pydantic import BaseModel
+import requests
 from src.constants import COLLECTION_NAME, N_WORDS
 from src.utils import get_english_words, get_vector_db_chroma_client
 
@@ -64,6 +66,7 @@ def post_vector_db():
     )
     return {"message": "Chroma filled"}
 
+
 @app.get("/vector_db")
 def get_vector_db():
     """Get the collection's documents."""
@@ -71,3 +74,9 @@ def get_vector_db():
     chroma_client = get_vector_db_chroma_client()
     collection = chroma_client.get_collection("english_words")
     return {"documents": collection.get()}
+
+
+@app.get("/vector_db_health")
+def get_vector_db_health():
+    """Check the health of the vector database."""
+    return {"vector_db_status": requests.get(f"http://{os.environ['CHROMA_HOST']}:8000/api/v1/heartbeat").status_code}
