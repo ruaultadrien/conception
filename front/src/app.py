@@ -22,7 +22,11 @@ def app() -> None:
     #res = requests.post("http://backend:8888/most_similar_words", json={"word": query_word}, timeout=60)
     res = requests.post(f"{os.environ['BACKEND_HOST']}:8888/most_similar_words", json={"word": query_word}, timeout=60)
 
-    st.write(res.json())
+    st.write(res.status_code)
+    if res.status_code == 200:
+        st.write(res.json())
+    else:
+        st.error("Could not query most similar words.")
 
 
 @st.cache_data

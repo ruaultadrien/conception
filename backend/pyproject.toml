@@ -15,6 +15,7 @@ english-words = "^2.0.1"
 ruff = "^0.3.4"
 pytest = "^8.1.1"
 httpx = "^0.27.0"
+python-dotenv = "^1.0.1"
 
 
 [build-system]
