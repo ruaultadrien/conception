@@ -12,7 +12,7 @@ services:
         fromService:
           name: back
           type: web
-          property: host
+          envVarKey: RENDER_EXTERNAL_HOSTNAME
 
   - name: back
     type: web
@@ -22,11 +22,16 @@ services:
     dockerContext: backend
     plan: free
     envVars:
+      #- key: CHROMA_HOST
+        #fromService:
+          #name: chroma
+          #type: web
+          #property: host
       - key: CHROMA_HOST
         fromService:
           name: chroma
           type: web
-          property: host
+          envVarKey: RENDER_EXTERNAL_HOSTNAME
 
   - name: chroma
     type: web
