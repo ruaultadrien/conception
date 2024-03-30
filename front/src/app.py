@@ -26,4 +26,13 @@ def app() -> None:
     else:
         st.error("Could not query most similar words.")
 
+    st.write("---")
+    st.header("Vector Database state")
+    res = requests.get(f"http://{os.environ['BACKEND_HOST']}:8888/vector_db")
+    if res.status_code == 200:
+        st.metric("Number of documents in the collection:", len(res.json()["documents"]['ids']))
+
+
+    else:
+        st.error("Could not query vector database.")
 

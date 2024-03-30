@@ -15,5 +15,5 @@ jobs:
     steps:
       - name: Curl request on the Backend
         run: |
-          curl -X POST --fail https://back-cd38.onrender.com/fill_vector_db
+          curl -X POST --fail https://back-cd38.onrender.com/vector_db
   
