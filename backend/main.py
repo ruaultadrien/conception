@@ -6,7 +6,7 @@ import chromadb
 from chromadb.utils import embedding_functions
 from fastapi import FastAPI
 from pydantic import BaseModel
-from src.constants import N_WORDS
+from src.constants import COLLECTION_NAME, N_WORDS
 from src.utils import get_english_words, get_vector_db_chroma_client
 
 logging.getLogger().setLevel(logging.INFO)
@@ -31,7 +31,7 @@ def get_most_similar_words(word_request: WordRequest):
     """Get the most similar words to a given word."""
     logging.info("Creating Chroma client...")
     chroma_client = chromadb.HttpClient(host=os.environ["CHROMA_HOST"], port=8000)
-    collection = chroma_client.get_collection("english_words")
+    collection = chroma_client.get_collection(COLLECTION_NAME)
     res = collection.query(query_texts=[word_request.word], n_results=5)
     documents = res["documents"]
 
