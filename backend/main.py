@@ -30,7 +30,7 @@ class WordsResponse(BaseModel):
 def get_most_similar_words(word_request: WordRequest):
     """Get the most similar words to a given word."""
     logging.info("Creating Chroma client...")
-    chroma_client = chromadb.HttpClient(host="chroma", port=8000)
+    chroma_client = chromadb.HttpClient(host=os.environ["CHROMA_HOST"], port=8000)
     collection = chroma_client.get_collection("english_words")
     res = collection.query(query_texts=[word_request.word], n_results=5)
     documents = res["documents"]
@@ -47,7 +47,7 @@ def fill_chroma_with_all_english_words():
     english_words = english_words[:N_WORDS]
 
     embeddings_model = embedding_functions.HuggingFaceEmbeddingFunction(
-        api_key=os.getenv("HUGGINGFACEHUB_API_TOKEN"),
+        api_key=os.environ["HUGGINGFACEHUB_API_TOKEN"],
         model_name="sentence-transformers/all-MiniLM-l6-v2",
     )
 
