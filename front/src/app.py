@@ -16,8 +16,6 @@ def app() -> None:
 
     st.info("We only use a subset of the English dictionnary so far, results might not be of good quality.")
 
-    fill_chroma()
-
     logging.info("Querying collection...")
     #res = requests.post("http://backend:8888/most_similar_words", json={"word": query_word}, timeout=60)
     res = requests.post(f"http://{os.environ['BACKEND_HOST']}:8888/most_similar_words", json={"word": query_word}, timeout=60)
@@ -28,9 +26,13 @@ def app() -> None:
     else:
         st.error("Could not query most similar words.")
 
+    st.write("---")
+    st.header("Vector Database state")
+    res = requests.get(f"http://{os.environ['BACKEND_HOST']}:8888/vector_db")
+    if res.status_code == 200:
+        st.metric("Number of documents in the collection:", len(res.json()["documents"]['ids']))
 
-@st.cache_data
-def fill_chroma():
-    """Fill Chroma with all English words and their embeddings."""
-    logging.info("Filling Chroma...")
-    requests.post(f"http://{os.environ['BACKEND_HOST']}:8888/fill_vector_db", timeout=3600)
+
+    else:
+        st.error("Could not query vector database.")
+
