@@ -3,10 +3,12 @@ name: CI Pipeline Frontend
 on:
   push:
     branches: [ main ]
+    paths:
+      - 'front/**'
   pull_request:
     branches: [ main ]
-  paths:
-    - 'front/**'
+    paths:
+      - 'front/**'
 
 jobs:
   ci:
