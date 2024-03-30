@@ -1,0 +1,20 @@
+
+name: Scheduled Vector DB Filling
+
+on:
+  schedule:
+    - cron: '0 13 * * *'
+  on:
+    push:
+      branches: [ main ]
+    workflow_dispatch:
+
+jobs:
+  scheduled-vector-db-filling:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Curl request on the Backend
+        run: |
+          curl -X POST https://back-cd38.onrender.com/fill_vector_db
+  

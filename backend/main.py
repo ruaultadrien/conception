@@ -40,7 +40,7 @@ def get_most_similar_words(word_request: WordRequest):
     return {"words": documents[0]}
 
 
-@app.post("/fill_chroma")
+@app.post("/fill_vector_db")
 def fill_chroma_with_all_english_words():
     """Fill Chroma with all English words and their embeddings."""
     english_words = get_english_words()
