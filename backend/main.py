@@ -79,4 +79,6 @@ def get_vector_db():
 @app.get("/vector_db_health")
 def get_vector_db_health():
     """Check the health of the vector database."""
-    return {"vector_db_status": requests.get(f"http://{os.environ['CHROMA_HOST']}:8000/api/v1/heartbeat").status_code}
+    res = requests.get(f"http://{os.environ['CHROMA_HOST']}:8000/api/v1/heartbeat")
+    vector_db_is_up = res.status_code == 200
+    return {"vector_db_is_up": vector_db_is_up}
