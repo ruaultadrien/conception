@@ -20,7 +20,7 @@ def app() -> None:
 
     logging.info("Querying collection...")
     #res = requests.post("http://backend:8888/most_similar_words", json={"word": query_word}, timeout=60)
-    res = requests.post(f"{os.environ['BACKEND_HOST']}:8888/most_similar_words", json={"word": query_word}, timeout=60)
+    res = requests.post(f"http://{os.environ['BACKEND_HOST']}:8888/most_similar_words", json={"word": query_word}, timeout=60)
 
     st.write(res.status_code)
     if res.status_code == 200:
@@ -33,4 +33,4 @@ def app() -> None:
 def fill_chroma():
     """Fill Chroma with all English words and their embeddings."""
     logging.info("Filling Chroma...")
-    requests.post(f"{os.environ['BACKEND_HOST']}:8888/fill_vector_db", timeout=3600)
+    requests.post(f"http://{os.environ['BACKEND_HOST']}:8888/fill_vector_db", timeout=3600)
