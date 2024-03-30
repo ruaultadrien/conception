@@ -47,7 +47,8 @@ def fill_chroma_with_all_english_words():
     english_words = english_words[:N_WORDS]
 
     embeddings_model = embedding_functions.HuggingFaceEmbeddingFunction(
-        api_key=os.environ["HUGGINGFACEHUB_API_TOKEN"],
+        #api_key=os.environ["HUGGINGFACEHUB_API_TOKEN"],
+        api_key="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",
         model_name="sentence-transformers/all-MiniLM-l6-v2",
     )
 
