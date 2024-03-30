@@ -3,6 +3,7 @@ import logging
 import requests
 import os
 
+
 def query_most_similar_words_container():
     # Query space
     st.write("---")

@@ -14,7 +14,7 @@ def app() -> None:
     """Streamlit app."""
     st.title("Conception")
     st.header("Vector Database state")
-    
+
     # health check on the vector database
     res = requests.get(f"http://{os.environ['BACKEND_HOST']}:8888/vector_db_health")
     vector_db_is_up = res.json()["vector_db_is_up"]
@@ -22,7 +22,7 @@ def app() -> None:
         st.write("Vector database is up.")
     else:
         st.error("Vector database is sick.")
-    
+
     if vector_db_is_up:
         vector_db_container()
         query_most_similar_words_container()

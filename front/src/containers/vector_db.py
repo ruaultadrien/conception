@@ -2,6 +2,7 @@ import requests
 import streamlit as st
 import os
 
+
 def vector_db_container():
     # Retrieve the number of documents in the collection
     res = requests.get(f"http://{os.environ['BACKEND_HOST']}:8888/vector_db")
