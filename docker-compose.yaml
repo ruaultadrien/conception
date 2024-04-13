@@ -17,6 +17,7 @@ services:
     environment:
       - HUGGINGFACEHUB_API_TOKEN=${HUGGINGFACEHUB_API_TOKEN}
       - CHROMA_HOST=chroma
+      - CHROMA_PORT=8000
 
   front:
     build: ./front
