@@ -78,7 +78,10 @@ def get_vector_db():
         raise HTTPException(status_code=500, detail="Vector database is down.")
 
     chroma_client = get_vector_db_chroma_client()
-    collection = chroma_client.get_collection("english_words")
+    try:
+        collection = chroma_client.get_collection(COLLECTION_NAME)
+    except ValueError:
+        raise HTTPException(status_code=500, detail=f"Collection {COLLECTION_NAME} not found. Call POST /vector_db to create it.")
     return {"documents": collection.get()}
 
 
