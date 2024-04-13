@@ -1,5 +1,6 @@
 """Streamlit app declaration."""
 
+import logging
 import os
 
 
@@ -10,6 +11,9 @@ from src.utils import resolve_url_from_environment
 from src.containers.query_most_similar_words import query_most_similar_words_container
 from src.containers.vector_db import vector_db_container
 
+# Set up logging
+logging.basicConfig(level=logging.INFO)
+
 
 def app() -> None:
     """Streamlit app."""
@@ -18,12 +22,18 @@ def app() -> None:
 
     # health check on the vector database
     backend_url = resolve_url_from_environment(os.environ["BACKEND_HOST"])
-    res = requests.get(f"{backend_url}:8888/vector_db_health")
+    request_url = f"{backend_url}:8888/vector_db_health"
+    logging.info(f"Checking the health of the vector database at {request_url}")
+    res = requests.get(request_url)
     vector_db_is_up = res.json()["vector_db_is_up"]
     if vector_db_is_up:
-        st.write("Vector database is up.")
+        message = "Vector database is up."
+        logging.info(message)
+        st.write(message)
     else:
-        st.error("Vector database is sick.")
+        message = "Vector database is down."
+        logging.info(message)
+        st.error(message)
 
     if vector_db_is_up:
         vector_db_container()
