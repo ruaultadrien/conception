@@ -1,10 +1,9 @@
 import streamlit as st
 import logging
 import requests
-import os
 
 
-def query_most_similar_words_container():
+def query_most_similar_words_container(backend_url: str, backend_port: str):
     # Query space
     st.write("---")
     st.header("Query most similar words")
@@ -15,7 +14,7 @@ def query_most_similar_words_container():
 
     logging.info("Querying collection...")
     res = requests.post(
-        f"http://{os.environ['BACKEND_HOST']}:8888/most_similar_words", json={"word": query_word}, timeout=120
+        f"{backend_url}:{backend_port}/most_similar_words", json={"word": query_word}, timeout=120
     )
 
     st.write(res.status_code)
