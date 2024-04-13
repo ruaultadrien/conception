@@ -1,3 +1,6 @@
+[![CI Frontend](https://github.com/ruaultadrien/conception/actions/workflows/ci-frontend.yaml/badge.svg)](https://github.com/ruaultadrien/conception/actions/workflows/ci-frontend.yaml)
+[![CI Backend](https://github.com/ruaultadrien/conception/actions/workflows/ci-backend.yaml/badge.svg)](https://github.com/ruaultadrien/conception/actions/workflows/ci-backend.yaml)
+
 # conception
 
 ## Run the application locally
