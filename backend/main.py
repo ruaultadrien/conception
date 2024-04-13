@@ -4,13 +4,12 @@ from http.client import HTTPException
 import logging
 import os
 
-import chromadb
 from chromadb.utils import embedding_functions
 from fastapi import FastAPI
 from pydantic import BaseModel
 import requests
 from src.constants import COLLECTION_NAME, N_WORDS
-from src.utils import get_english_words, get_vector_db_chroma_client, resolve_http_or_https_from_environment
+from src.utils import get_english_words, get_vector_db_chroma_client, resolve_chroma_port_from_environment, resolve_http_or_https_from_environment
 
 logging.getLogger().setLevel(logging.INFO)
 
@@ -33,7 +32,7 @@ class WordsResponse(BaseModel):
 def get_most_similar_words(word_request: WordRequest):
     """Get the most similar words to a given word."""
     logging.info("Creating Chroma client...")
-    chroma_client = chromadb.HttpClient(host=os.environ["CHROMA_HOST"], port=8000)
+    chroma_client = get_vector_db_chroma_client()
     collection = chroma_client.get_collection(COLLECTION_NAME)
     res = collection.query(query_texts=[word_request.word], n_results=5)
     documents = res["documents"]
@@ -95,9 +94,3 @@ def get_vector_db_health():
     res = requests.get(request_url, timeout=5)
     vector_db_is_up = res.status_code == 200
     return {"vector_db_is_up": vector_db_is_up}
-
-def resolve_chroma_port_from_environment():
-    if os.environ.get("RENDER", False):
-        return 443
-    else:
-        return os.environ["CHROMA_PORT"]
