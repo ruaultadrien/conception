@@ -23,7 +23,7 @@ def get_vector_db_chroma_client() -> chromadb.api.ClientAPI:
         host=os.environ["CHROMA_HOST"], port=8000, settings=chromadb.config.Settings(anonymized_telemetry=False), ssl=use_ssl
     )
 
-def resolve_url_from_environment(host):
+def resolve_http_or_https_from_environment(host):
     if os.environ.get("RENDER", False):
         return f"https://{host}"
     else:

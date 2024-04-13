@@ -10,7 +10,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 import requests
 from src.constants import COLLECTION_NAME, N_WORDS
-from src.utils import get_english_words, get_vector_db_chroma_client
+from src.utils import get_english_words, get_vector_db_chroma_client, resolve_http_or_https_from_environment
 
 logging.getLogger().setLevel(logging.INFO)
 
@@ -73,7 +73,7 @@ def get_vector_db():
     """Get the collection's documents."""
     logging.info("Creating Chroma client...")
     vector_db_is_up = get_vector_db_health()["vector_db_is_up"]
-    
+
     if not vector_db_is_up:
         raise HTTPException(status_code=500, detail="Vector database is down.")
 
@@ -85,6 +85,17 @@ def get_vector_db():
 @app.get("/vector_db_health")
 def get_vector_db_health():
     """Check the health of the vector database."""
-    res = requests.get(f"http://{os.environ['CHROMA_HOST']}:8000/api/v1/heartbeat")
+    chroma_url = resolve_http_or_https_from_environment(os.environ["CHROMA_HOST"])
+    chroma_port = resolve_chroma_port_from_environment()
+    request_url = f"{chroma_url}:{chroma_port}/api/v1/heartbeat"
+    #request_url = f"{chroma_url}:/api/v1/heartbeat"
+    logging.info(f"Checking the health of the vector database at {request_url}")
+    res = requests.get(request_url)
     vector_db_is_up = res.status_code == 200
     return {"vector_db_is_up": vector_db_is_up}
+
+def resolve_chroma_port_from_environment():
+    if os.environ.get("RENDER", False):
+        return 443
+    else:
+        return os.environ["CHROMA_PORT"]
