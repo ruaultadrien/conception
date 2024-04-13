@@ -88,9 +88,8 @@ def get_vector_db_health():
     chroma_url = resolve_http_or_https_from_environment(os.environ["CHROMA_HOST"])
     chroma_port = resolve_chroma_port_from_environment()
     request_url = f"{chroma_url}:{chroma_port}/api/v1/heartbeat"
-    #request_url = f"{chroma_url}:/api/v1/heartbeat"
     logging.info(f"Checking the health of the vector database at {request_url}")
-    res = requests.get(request_url)
+    res = requests.get(request_url, timeout=5)
     vector_db_is_up = res.status_code == 200
     return {"vector_db_is_up": vector_db_is_up}
 
