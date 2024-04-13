@@ -25,13 +25,15 @@ def vector_db_container(backend_url:str, backend_port:str):
 
     if vector_db_is_up:
         # Retrieve the number of documents in the collection
-        res = requests.get(f"{backend_url}:{backend_port}/vector_db")
+        request_url = f"{backend_url}:{backend_port}/vector_db"
+        logging.info(f"Get documents with this url: {request_url}")
+        res = requests.get(request_url)
         if res.status_code == 200:
             st.metric("Number of documents in the collection:", len(res.json()["documents"]["ids"]))
         else:
             st.error("Could not query vector database.")
 
         if st.button("POST vector database"):
-            requests.post(f"{backend_url}:{backend_port}/vector_db", timeout=120)
+            requests.post(request_url, timeout=120)
     
     return vector_db_is_up
