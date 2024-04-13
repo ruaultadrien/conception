@@ -1,5 +1,6 @@
 """Utility functions for backend."""
 
+import logging
 import chromadb
 import chromadb.api
 import chromadb.config
@@ -17,6 +18,7 @@ def get_english_words() -> list:
 def get_vector_db_chroma_client() -> chromadb.api.ClientAPI:
     """Get a Chroma client for the vector database."""
     use_ssl = os.environ.get("RENDER", False)
+    logging.info(f"Chroma host used for Chroma client creation: {os.environ['CHROMA_HOST']}")
     return chromadb.HttpClient(
         host=os.environ["CHROMA_HOST"], port=8000, settings=chromadb.config.Settings(anonymized_telemetry=False), ssl=use_ssl
     )
