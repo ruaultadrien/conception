@@ -11,4 +11,4 @@ RUN python3 -m pip install --upgrade pip \
     && pip install poetry \
     && poetry install
 
-CMD ["poetry", "run", "streamlit", "run", "main.py"]
+CMD ["poetry", "run", "streamlit", "run", "Conception.py"]
