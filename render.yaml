@@ -34,3 +34,7 @@ services:
     image:
       url: docker.io/chromadb/chroma:latest
     plan: free
+
+databases:
+  - name: db
+    plan: free
