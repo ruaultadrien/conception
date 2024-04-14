@@ -33,9 +33,10 @@ def post_data() -> None:
         words_iter = english_words[i * N_WORDS_PER_CHUNK : (i + 1) * N_WORDS_PER_CHUNK]
         add_words_to_collection(collection, words_iter)
     # Add the remaining words
-    logging.info(f"Adding remaining documents to collection...")
     remaining_words = english_words[n_iter * N_WORDS_PER_CHUNK :]
-    add_words_to_collection(collection, remaining_words)
+    if len(remaining_words) > 0:
+        logging.info(f"Adding remaining documents to collection...")
+        add_words_to_collection(collection, remaining_words)
 
     logging.info("Adding documents to collection...")
     collection.add(
