@@ -2,6 +2,8 @@
 
 import logging
 
+import streamlit as st
+
 from src.app import app
 
 logging.getLogger().setLevel(logging.INFO)
