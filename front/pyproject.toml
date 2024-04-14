@@ -10,6 +10,7 @@ python = "^3.11"
 streamlit = "^1.26.0"
 requests = "^2.31.0"
 ruff = "^0.3.4"
+mypy = "^1.9.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.3"
@@ -20,3 +21,13 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.ruff]
 line-length = 120
+
+[tool.ruff.lint]
+select = ["D", "PL", "I"]
+
+# On top of the Google convention, disable `D417`, which requires
+# documentation for every function parameter.
+ignore = ["D417"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"

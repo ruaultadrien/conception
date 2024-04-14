@@ -1,9 +1,12 @@
-import streamlit as st
+"""Streamlit container to query most similar words."""
 import logging
+
 import requests
+import streamlit as st
 
 
 def query_most_similar_words_container(backend_url: str, backend_port: str):
+    """Streamlit container to query most similar words."""
     # Query space
     st.write("---")
     st.header("Query most similar words")
@@ -18,7 +21,7 @@ def query_most_similar_words_container(backend_url: str, backend_port: str):
     )
 
     st.write(res.status_code)
-    if res.status_code == 200:
+    if res.status_code == 200: # noqa: PLR2004
         st.write(res.json())
     else:
         st.error("Could not query most similar words.")
