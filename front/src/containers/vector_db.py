@@ -1,10 +1,12 @@
+"""Streamlit container displaying the state of the vector database."""
+import logging
+
 import requests
 import streamlit as st
 
-import logging
-
 
 def vector_db_container(backend_url:str, backend_port:str):
+    """Streamlit container displaying the state of the vector database."""
     st.header("Vector Database state")
 
     # health check on the vector database
@@ -29,7 +31,7 @@ def vector_db_container(backend_url:str, backend_port:str):
         logging.info(f"Get documents with this url: {request_url}")
         with st.spinner("Querying vector database..."):
             res = requests.get(request_url)
-        if res.status_code == 200:
+        if res.status_code == 200: # noqa: PLR2004
             st.metric("Number of documents in the collection:", len(res.json()["documents"]["ids"]))
         else:
             st.error("Could not query vector database.")

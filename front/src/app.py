@@ -3,12 +3,11 @@
 import logging
 import os
 
-
 import streamlit as st
 
-from src.utils import resolve_backend_port_from_environment, resolve_url_from_environment
 from src.containers.query_most_similar_words import query_most_similar_words_container
 from src.containers.vector_db import vector_db_container
+from src.utils import resolve_backend_port_from_environment, resolve_url_from_environment
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
