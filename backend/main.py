@@ -58,7 +58,7 @@ def get_vector_db():
     if not vector_db_is_up:
         raise HTTPException(status_code=500, detail="Vector database is down.")
 
-    #chroma_client = get_vector_db_chroma_client()
+    # chroma_client = get_vector_db_chroma_client()
     chroma_client = ChromaClient()
     try:
         collection = chroma_client.chroma_client.get_collection(COLLECTION_NAME)
@@ -77,5 +77,5 @@ def get_vector_db_health():
     request_url = f"{chroma_url}:{chroma_port}/api/v1/heartbeat"
     logging.info(f"Checking the health of the vector database at {request_url}")
     res = requests.get(request_url, timeout=5)
-    vector_db_is_up = res.status_code == 200 # noqa: PLR2004
+    vector_db_is_up = res.status_code == 200  # noqa: PLR2004
     return {"vector_db_is_up": vector_db_is_up}

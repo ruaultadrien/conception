@@ -9,7 +9,7 @@ repos:
     
     - id: back
       name: Backend
-      entry: bash -c "cd backend && poetry run ruff check --fix && poetry run python -m pytest"
+      entry: bash -c "cd backend && poetry run ruff check --fix && poetry run ruff format && poetry run python -m pytest"
       language: system
       types: [python]
 

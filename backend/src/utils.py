@@ -9,5 +9,3 @@ def resolve_http_or_https_from_environment(host):
         return f"https://{host}"
     else:
         return f"http://{host}"
-
-

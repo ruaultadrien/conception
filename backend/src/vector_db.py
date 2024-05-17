@@ -1,4 +1,5 @@
 """Functions to interact with the vector database."""
+
 import logging
 import os
 
@@ -7,11 +8,6 @@ from english_words import get_english_words_set
 
 from src.constants import N_WORDS, N_WORDS_PER_CHUNK
 from src.vector_db_clients import ChromaClient
-
-#from src.utils import get_vector_db_chroma_client
-
-
-
 
 
 def post_data() -> None:
