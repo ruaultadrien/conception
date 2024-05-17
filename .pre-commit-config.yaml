@@ -3,7 +3,7 @@ repos:
   hooks:
     - id: front
       name: Frontend
-      entry: bash -c "cd front && poetry run ruff check --fix && poetry run python -m pytest"
+      entry: bash -c "cd front && poetry run ruff check --fix && poetry run ruff format && poetry run python -m pytest"
       language: system
       types: [python]
     
