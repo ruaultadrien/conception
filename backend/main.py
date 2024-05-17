@@ -58,7 +58,6 @@ def get_vector_db():
     if not vector_db_is_up:
         raise HTTPException(status_code=500, detail="Vector database is down.")
 
-    # chroma_client = get_vector_db_chroma_client()
     chroma_client = ChromaClient()
     try:
         collection = chroma_client.chroma_client.get_collection(COLLECTION_NAME)
