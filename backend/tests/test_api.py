@@ -1,4 +1,5 @@
 """Tests for the backend API."""
+
 from fastapi.testclient import TestClient
 
 from main import app

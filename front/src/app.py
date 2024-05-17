@@ -16,7 +16,7 @@ def app() -> None:
     """Streamlit app."""
     backend_url = resolve_url_from_environment(os.environ["BACKEND_HOST"])
     backend_port = resolve_backend_port_from_environment()
-    
+
     st.title("Conception")
 
     query_most_similar_words_container(backend_url, backend_port)
