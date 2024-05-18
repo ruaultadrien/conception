@@ -1,0 +1,31 @@
+
+[tool.poetry]
+name = "azureml"
+version = "0.1.0"
+description = ""
+authors = ["Adrien Ruault <ar@visium.ch>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+azure-ai-ml = "^1.16.0"
+ruff = "^0.4.4"
+scikit-learn = "^1.4.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = ["D", "PL", "I"]
+
+# On top of the Google convention, disable `D417`, which requires
+# documentation for every function parameter.
+ignore = ["D417"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
