@@ -14,6 +14,7 @@ import logging
 
 from nltk.corpus import words
 from sentence_transformers import SentenceTransformer
+from tqdm import tqdm
 from typing_extensions import Annotated
 
 # Set up logging
@@ -32,8 +33,12 @@ def main(output_folder: Annotated[pathlib.Path, typer.Option()]):
 
     # Compute word embeddings
     logging.info("Computing word embeddings.")
-    word_embeddings_records = [{"word": word, "embedding": embeddings_model.encode(word)} for word in english_words]
-    df = pd.DataFrame.from_records(word_embeddings_records)
+    word_embeddings_records = []
+    embeddings = embeddings_model.encode(english_words)
+    df = pd.DataFrame.from_dict({"word": english_words, "embedding": embeddings})
+    # for word in tqdm(english_words):
+    # word_embeddings_records.append({"word": word, "embedding": embeddings_model.encode(word)})
+    # df = pd.DataFrame.from_records(word_embeddings_records)
 
     # Save embeddings
     logging.info(f"Saving word embeddings to {output_folder}.")
