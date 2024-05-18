@@ -11,6 +11,14 @@ python = "^3.11"
 azure-ai-ml = "^1.16.0"
 ruff = "^0.4.4"
 scikit-learn = "^1.4.2"
+pytest = "^8.2.0"
+langchain = "^0.2.0"
+transformers = "^4.41.0"
+nltk = "^3.8.1"
+sentence-transformers = "^2.7.0"
+pandas = "^2.2.2"
+typer = "^0.12.3"
+tqdm = "^4.66.4"
 
 
 [build-system]

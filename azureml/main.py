@@ -3,7 +3,8 @@
 import logging
 import os
 
-from azure.ai.ml import MLClient, command
+from azure.ai.ml import MLClient, Output, command
+from azure.ai.ml.constants import AssetTypes
 from azure.identity import DefaultAzureCredential
 
 # Set up logging
@@ -18,13 +19,22 @@ def main():
         os.environ["RESOURCE_GROUP"],
         os.environ["WORKSPACE_NAME"],
     )
+
+    job_outputs = {
+        "word_embeddings": Output(
+            type=AssetTypes.URI_FOLDER, path="azureml://datastores/conception/paths/word_embeddings"
+        )
+    }
+
     # configure job
     job = command(
         code="./src",
-        command="python train.py",
-        environment="AzureML-sklearn-0.24-ubuntu18.04-py37-cpu@latest",
+        command="python compute_word_embeddings.py --output-folder ${{outputs.word_embeddings}}",
+        outputs=job_outputs,
+        environment="TODO",
         compute="conception-cluster",
-        experiment_name="train-model",
+        display_name="Compute Word Embeddings",
+        experiment_name="compute-word-embeddings",
     )
 
     # connect to workspace and submit job
