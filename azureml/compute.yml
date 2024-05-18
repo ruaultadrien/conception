@@ -1,0 +1,6 @@
+$schema: https://azuremlschemas.azureedge.net/latest/amlCompute.schema.json 
+name: conception-cluster
+type: amlcompute
+size: STANDARD_DS11_v2
+min_instances: 0
+max_instances: 1
