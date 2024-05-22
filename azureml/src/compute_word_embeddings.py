@@ -33,15 +33,12 @@ def main(output_folder: Annotated[pathlib.Path, typer.Option()]):
 
     # Compute word embeddings
     logging.info("Computing word embeddings.")
-    word_embeddings_records = []
-    embeddings = embeddings_model.encode(english_words)
+    embeddings = list(embeddings_model.encode(english_words))
     df = pd.DataFrame.from_dict({"word": english_words, "embedding": embeddings})
-    # for word in tqdm(english_words):
-    # word_embeddings_records.append({"word": word, "embedding": embeddings_model.encode(word)})
-    # df = pd.DataFrame.from_records(word_embeddings_records)
 
     # Save embeddings
     logging.info(f"Saving word embeddings to {output_folder}.")
+    output_folder.mkdir(parents=True, exist_ok=True)
     df.to_parquet(output_folder / "word_embeddings.parquet", index=False)
 
 
