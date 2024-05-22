@@ -13,3 +13,8 @@ repos:
       language: system
       types: [python]
 
+    - id: azureml
+      name: AzureML
+      entry: bash -c "cd azureml && poetry run ruff check --fix && poetry run ruff format && poetry run python -m pytest"
+      language: system
+      types: [python]
