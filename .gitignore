@@ -135,3 +135,43 @@ dmypy.json
 
 # Ignore generated credentials from google-github-actions/auth
 gha-creds-*.json
+
+
+
+
+#############################
+# Terraform ignore ##########
+#############################
+
+# Ignore Terraform state files
+terraform.tfstate
+terraform.tfstate.backup
+
+# Ignore .terraform directory
+.terraform/
+
+# Ignore crash log files
+crash.log
+
+# Ignore override files as they are usually local and ignored
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Ignore plan output files
+*.tfplan
+
+# Ignore CLI configuration files
+.terraformrc
+terraform.rc
+
+# Ignore any sensitive variable files
+secret.tfvars
+
+#############################
+# End of Terraform ignore ###
+#############################
+
+# Ignore parquet files
+*.parquet
