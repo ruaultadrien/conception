@@ -4,12 +4,28 @@
 #################################
 # Configure the Azure providers #
 #################################
+
+terraform {
+  required_providers {
+    github = {
+      source  = "integrations/github"
+      version = "~> 6.0"
+    }
+  }
+}
+
 provider "azurerm" {
   features {}
 }
 
 provider "azuread" {
   tenant_id = var.tenant_id
+}
+
+
+provider "github" {
+  token = var.github_token
+  owner = var.github_owner
 }
 
 
@@ -98,6 +114,30 @@ resource "azurerm_role_assignment" "github_actions_sp_contributor" {
   principal_id   = azuread_service_principal.github_actions_sp.object_id
   role_definition_name = "Contributor"
   scope          = azurerm_resource_group.conception.id
+}
+
+
+#################################
+# GitHub Actions ################
+#################################
+
+
+resource "github_actions_secret" "acr_login_server" {
+  repository      = var.github_repository
+  secret_name     = "REGISTRY_SERVER"
+  plaintext_value = azurerm_container_registry.conception.login_server
+}
+
+resource "github_actions_secret" "acr_username" {
+  repository      = var.github_repository
+  secret_name     = "REGISTRY_USERNAME"
+  plaintext_value = azuread_service_principal.github_actions_sp.client_id
+}
+
+resource "github_actions_secret" "acr_password" {
+  repository      = var.github_repository
+  secret_name     = "REGISTRY_PASSWORD"
+  plaintext_value = azuread_service_principal_password.github_actions_sp_password.value
 }
 
 

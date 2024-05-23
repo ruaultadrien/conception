@@ -2,7 +2,7 @@ name: CI AzureML
 
 on:
   push:
-    branches: [ main, dev ]
+    branches: [ main ]
     paths:
       - 'azureml/**'
   pull_request:
