@@ -1,6 +1,6 @@
 FROM python:3.11-slim
 
-COPY . /workdir
+COPY ./pyproject.toml /workdir/pyproject.toml
 
 WORKDIR /workdir
 
