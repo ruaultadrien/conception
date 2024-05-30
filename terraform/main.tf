@@ -88,6 +88,33 @@ resource "azurerm_machine_learning_workspace" "conception" {
   }
 }
 
+resource "azurerm_machine_learning_compute_cluster" "conception" {
+  name                   = "conceptioncluster"
+  machine_learning_workspace_id = azurerm_machine_learning_workspace.conception.id
+  location               = azurerm_resource_group.conception.location
+  vm_priority = "Dedicated"
+  vm_size = "Standard_DS2_v2"
+  scale_settings {
+    min_node_count                       = 0
+    max_node_count                       = 1
+    scale_down_nodes_after_idle_duration = "PT30S" # 30 seconds
+  }
+  identity {
+    type = "SystemAssigned"
+  }
+}
+
+resource "azurerm_storage_container" "conception" {
+  name                  = "conception-storage-container"
+  storage_account_name  = azurerm_storage_account.conception.name
+  container_access_type = "private"
+}
+
+resource "azurerm_machine_learning_datastore_datalake_gen2" "conception" {
+  name                 = "conceptiondatastore"
+  workspace_id         = azurerm_machine_learning_workspace.conception.id
+  storage_container_id = azurerm_storage_container.conception.resource_manager_id
+}
 #################################
 # Azure AD ######################
 #################################
@@ -124,19 +151,19 @@ resource "azurerm_role_assignment" "github_actions_sp_contributor" {
 
 resource "github_actions_secret" "acr_login_server" {
   repository      = var.github_repository
-  secret_name     = "REGISTRY_SERVER"
+  secret_name     = "REGISTRY_SERVER" # pragma: allowlist secret
   plaintext_value = azurerm_container_registry.conception.login_server
 }
 
 resource "github_actions_secret" "acr_username" {
   repository      = var.github_repository
-  secret_name     = "REGISTRY_USERNAME"
+  secret_name     = "REGISTRY_USERNAME" # pragma: allowlist secret
   plaintext_value = azuread_service_principal.github_actions_sp.client_id
 }
 
 resource "github_actions_secret" "acr_password" {
   repository      = var.github_repository
-  secret_name     = "REGISTRY_PASSWORD"
+  secret_name     = "REGISTRY_PASSWORD" # pragma: allowlist secret
   plaintext_value = azuread_service_principal_password.github_actions_sp_password.value
 }
 
