@@ -4,11 +4,11 @@ on:
   push:
     branches: [ main ]
     paths:
-      - 'htmx-frontend/**'
+      - 'htmx_frontend/**'
   pull_request:
     branches: [ main ]
     paths:
-      - 'htmx-frontend/**'
+      - 'htmx_frontend/**'
   workflow_dispatch:
 
 jobs:
