@@ -211,6 +211,17 @@ resource "github_actions_secret" "subscription_id" {
   plaintext_value = data.azurerm_client_config.current.subscription_id
 }
 
+resource "github_actions_secret" "resource_group" {
+  repository      = var.github_repository
+  secret_name     = "RESOURCE_GROUP" # pragma: allowlist secret
+  plaintext_value = azurerm_resource_group.conception.name
+}
+
+resource "github_actions_secret" "workspace_name" {
+  repository      = var.github_repository
+  secret_name     = "WORKSPACE_NAME" # pragma: allowlist secret
+  plaintext_value = azurerm_machine_learning_workspace.conception.name
+}
 
 
 #################################

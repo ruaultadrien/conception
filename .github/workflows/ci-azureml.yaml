@@ -55,6 +55,10 @@ jobs:
       - name: Create an AzureML environment from the Docker image
         run: |
           az extension add -n ml
-          az ml environment create --name azureml-environment --docker ${{ secrets.REGISTRY_SERVER }}/azureml:latest
+          az ml environment create \
+            --name azureml-environment \
+            --resource-group ${{ secrets.RESOURCE_GROUP }} \
+            --workspace-name ${{ secrets.WORKSPACE_NAME }} \
+            --docker ${{ secrets.REGISTRY_SERVER }}/azureml:latest
 
   
