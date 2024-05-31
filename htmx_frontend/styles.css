@@ -1,0 +1,68 @@
+
+body {
+    font-family: "Albert Sans", sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.container ul {
+    margin-top: 0;
+    margin-right: 30px;
+}
+
+h1 {
+    color: #003366;
+    text-align: center;
+}
+h2 {
+    color: #006699;
+    text-align: center;
+}
+p, li {
+    color: #333;
+    line-height: 1.6;
+}
+
+.contact, .links, .skills, .hobbies, .languages {
+    background-color: #f1f1f1;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+.section-title {
+    color: #004080;
+    border-bottom: 2px solid #004080;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.item-container {
+    background-color: #e9edfa;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 0px;
+    margin-top: 10px;
+}
+
+.item-container h4 {
+    margin: 0;
+}
+
+.item-container p {
+    color: #333;
+    margin: 0;
+}
+
+.education-item {
+    background-color: #ccf2ff;
+}

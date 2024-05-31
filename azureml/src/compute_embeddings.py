@@ -14,7 +14,6 @@ import logging
 
 from nltk.corpus import words
 from sentence_transformers import SentenceTransformer
-from tqdm import tqdm
 from typing_extensions import Annotated
 
 # Set up logging
