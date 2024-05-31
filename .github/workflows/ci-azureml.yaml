@@ -56,7 +56,7 @@ jobs:
         run: |
           az extension add -n ml
           az ml environment create \
-            --name azureml-environment \
+            --name conception-azureml-env \
             --resource-group ${{ secrets.RESOURCE_GROUP }} \
             --workspace-name ${{ secrets.WORKSPACE_NAME }} \
             --image ${{ secrets.REGISTRY_SERVER }}/azureml:latest
