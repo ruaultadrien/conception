@@ -25,7 +25,7 @@ def main():
     )
 
     # Create azureml environment
-    created_environment = create_or_update_azureml_environment(ml_client)
+    # created_environment = create_or_update_azureml_environment(ml_client)
 
     job_outputs = {
         "word_embeddings": Output(
@@ -38,7 +38,8 @@ def main():
         code="./src",
         command="poetry run python compute_word_embeddings.py --output-folder ${{outputs.word_embeddings}}",
         outputs=job_outputs,
-        environment=created_environment,
+        # environment=created_environment,
+        environment="conception-azureml-env:9",
         compute="conceptioncluster",
         display_name="Compute Word Embeddings",
         experiment_name="compute-word-embeddings",
