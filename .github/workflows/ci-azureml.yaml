@@ -9,6 +9,11 @@ on:
     branches: [ main ]
     paths:
       - 'azureml/**'
+  workflow_dispatch:
+
+permissions:
+      id-token: write
+      contents: read
 
 jobs:
   push-docker-image:
