@@ -59,6 +59,6 @@ jobs:
             --name azureml-environment \
             --resource-group ${{ secrets.RESOURCE_GROUP }} \
             --workspace-name ${{ secrets.WORKSPACE_NAME }} \
-            --docker ${{ secrets.REGISTRY_SERVER }}/azureml:latest
+            --image ${{ secrets.REGISTRY_SERVER }}/azureml:latest
 
   
