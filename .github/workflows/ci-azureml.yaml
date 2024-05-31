@@ -50,5 +50,3 @@ jobs:
           az ml environment create --name azureml-environment --docker ${{ secrets.REGISTRY_SERVER }}/azureml:latest
 
   
-  run-azure-ml-job:
-    runs-on: ubuntu-latest
