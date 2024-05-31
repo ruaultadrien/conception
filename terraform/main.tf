@@ -115,27 +115,37 @@ resource "azurerm_machine_learning_datastore_datalake_gen2" "conception" {
   workspace_id         = azurerm_machine_learning_workspace.conception.id
   storage_container_id = azurerm_storage_container.conception.resource_manager_id
 }
+
+resource "azurerm_role_assignment" "cluster_to_access_storage" {
+  principal_id   = azurerm_machine_learning_compute_cluster.conception.identity[0].principal_id
+  role_definition_name = "Storage Blob Data Contributor"
+  scope          = azurerm_storage_account.conception.id  
+}
 #################################
 # Azure AD ######################
 #################################
 
 data "azuread_client_config" "current" {}
 
-resource "azuread_application" "github_actions" {
-  display_name = "github-actions"
-  owners       = [data.azuread_client_config.current.object_id]
+#resource "azuread_application" "github_actions" {
+  #display_name = "github-actions"
+  #owners       = [data.azuread_client_config.current.object_id]
+#}
+
+resource "azuread_application_registration" "github_actions_app" {
+  display_name = "github-actions-conception"
 }
 
 resource "azuread_service_principal" "github_actions_sp" {
-  client_id = azuread_application.github_actions.client_id
+  client_id = azuread_application_registration.github_actions_app.client_id
   app_role_assignment_required = false
   owners = [data.azuread_client_config.current.object_id]
 }
 
-resource "azuread_service_principal_password" "github_actions_sp_password" {
-  service_principal_id = azuread_service_principal.github_actions_sp.object_id
-  end_date             = "2024-12-31T12:00:00Z"
-}
+#resource "azuread_service_principal_password" "github_actions_sp_password" {
+  #service_principal_id = azuread_service_principal.github_actions_sp.object_id
+  #end_date             = "2024-12-31T12:00:00Z"
+#}
 
 resource "azurerm_role_assignment" "github_actions_sp_contributor" {
   principal_id   = azuread_service_principal.github_actions_sp.object_id
@@ -144,6 +154,22 @@ resource "azurerm_role_assignment" "github_actions_sp_contributor" {
 }
 
 
+
+resource "azuread_application_federated_identity_credential" "openid_connect_github_main" {
+  display_name = "github-main-branch"
+  audiences = ["api://AzureADTokenExchange"]
+  issuer = "https://token.actions.githubusercontent.com"
+  application_id = azuread_application_registration.github_actions_app.id
+  subject = "repo:ruaultadrien/conception:ref:refs/heads/main"
+}
+
+resource "azuread_application_federated_identity_credential" "openid_connect_github_pull_request" {
+  display_name = "github-pull-request"
+  audiences = ["api://AzureADTokenExchange"]
+  issuer = "https://token.actions.githubusercontent.com"
+  application_id = azuread_application_registration.github_actions_app.id
+  subject = "repo:ruaultadrien/conception:pull_request"
+}
 #################################
 # GitHub Actions ################
 #################################
@@ -157,22 +183,41 @@ resource "github_actions_secret" "acr_login_server" {
 
 resource "github_actions_secret" "acr_username" {
   repository      = var.github_repository
-  secret_name     = "REGISTRY_USERNAME" # pragma: allowlist secret
+  secret_name     = "SP_USERNAME" # pragma: allowlist secret
   plaintext_value = azuread_service_principal.github_actions_sp.client_id
 }
 
-resource "github_actions_secret" "acr_password" {
+#resource "github_actions_secret" "acr_password" {
+  #repository      = var.github_repository
+  #secret_name     = "SP_PASSWORD" # pragma: allowlist secret
+  #plaintext_value = azuread_service_principal_password.github_actions_sp_password.value
+#}
+
+resource "github_actions_secret" "client_id" {
   repository      = var.github_repository
-  secret_name     = "REGISTRY_PASSWORD" # pragma: allowlist secret
-  plaintext_value = azuread_service_principal_password.github_actions_sp_password.value
+  secret_name     = "CLIENT_ID" # pragma: allowlist secret
+  plaintext_value = azuread_service_principal.github_actions_sp.client_id
 }
+
+resource "github_actions_secret" "tenant_id" {
+  repository      = var.github_repository
+  secret_name     = "TENANT_ID" # pragma: allowlist secret
+  plaintext_value = var.tenant_id
+}
+
+resource "github_actions_secret" "subscription_id" {
+  repository      = var.github_repository
+  secret_name     = "SUBSCRIPTION_ID" # pragma: allowlist secret
+  plaintext_value = data.azurerm_client_config.current.subscription_id
+}
+
 
 
 #################################
 # Output variables ##############
 #################################
 
-output "service_principal_password" {
-  value = azuread_service_principal_password.github_actions_sp_password.value
-  sensitive = true
-}
+#output "service_principal_password" {
+  #value = azuread_service_principal_password.github_actions_sp_password.value
+  #sensitive = true
+#}

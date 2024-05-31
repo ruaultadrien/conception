@@ -37,6 +37,18 @@ jobs:
           tags: ${{ secrets.REGISTRY_SERVER }}/azureml:latest
           cache-from: type=registry,ref=${{ secrets.REGISTRY_SERVER }}/azureml:latest
           cache-to: type=inline
+
+      - name: Set up Azure CLI
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.CLIENT_ID }}
+          tenant-id: ${{ secrets.TENANT_ID }}
+          subscription-id: ${{ secrets.SUBSCRIPTION_ID }}
+
+      - name: Create an AzureML environment from the Docker image
+        run: |
+          az ml environment create --name azureml-environment --docker ${{ secrets.REGISTRY_SERVER }}/azureml:latest
+
   
   run-azure-ml-job:
     runs-on: ubuntu-latest

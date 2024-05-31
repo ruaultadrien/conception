@@ -36,7 +36,7 @@ def main():
     # configure job
     job = command(
         code="./src",
-        command="python compute_word_embeddings.py --output-folder ${{outputs.word_embeddings}}",
+        command="poetry run python compute_word_embeddings.py --output-folder ${{outputs.word_embeddings}}",
         outputs=job_outputs,
         environment=created_environment,
         compute="conceptioncluster",
