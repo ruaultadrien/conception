@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adrien Ruault - Machine Learning Engineer</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;700&display=swap" rel="stylesheet">
-</head>
-<body>
+import './App.css';
+
+function App() {
+  return (
     <div class="container">
         <h1>Adrien Ruault</h1>
         <h2>Machine Learning Engineer</h2>
@@ -111,5 +105,7 @@
             </ul>
         </section>
     </div>
-</body>
-</html>
+  );
+}
+
+export default App;
