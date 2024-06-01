@@ -56,4 +56,34 @@ jobs:
             --workspace-name ${{ secrets.WORKSPACE_NAME }} \
             --image ${{ secrets.REGISTRY_SERVER }}/azureml:latest
 
+  run-azureml:
+    runs-on: ubuntu-latest
+
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+
+    needs: push-docker-image
+
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+
+      - name: Set up Azure CLI
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.CLIENT_ID }}
+          tenant-id: ${{ secrets.TENANT_ID }}
+          subscription-id: ${{ secrets.SUBSCRIPTION_ID }}
+
+      - name: Install dependencies
+        run: |
+          cd azureml
+          python -m pip install --upgrade pip
+          pip install poetry
+          poetry install
+        shell: bash
+      
+      - name: Run azureml job
+        run: |
+          poetry run python
+
   
