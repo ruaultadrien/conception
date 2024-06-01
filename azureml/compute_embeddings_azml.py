@@ -33,7 +33,7 @@ def main():
     # configure job
     job = command(
         code=".",
-        command="poetry run python src/compute_embeddings.py --output-folder ${{outputs.word_embeddings}}",
+        command="python src/compute_embeddings.py --output-folder ${{outputs.word_embeddings}}",
         outputs=job_outputs,
         # environment=created_environment,
         environment=AZURE_ML_ENVIRONMENT_NAME,
