@@ -89,6 +89,6 @@ jobs:
       
       - name: Run azureml job
         run: |
-          poetry run python
+          poetry run python compute_embeddings_azml.py
 
   
