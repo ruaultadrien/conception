@@ -5,6 +5,12 @@ on:
   # Runs on pushes targeting the default branch
   push:
     branches: ["main"]
+    paths:
+      - "react_frontend/**"
+  pull_request:
+    branches: ["main"]
+    paths:
+      - "react_frontend/**"
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -51,7 +57,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload entire repository
-          path: 'react_frontend/'
+          path: 'react_frontend/build'
 
       - name: Deploy to GitHub Pages
         id: deployment
