@@ -9,9 +9,18 @@ This repository is a personal project for learning purposes.
 
 ## Set up your development environment
 
-Set the HUGGINGFACEHUB_API_TOKEN in a .env file then boom.
-
+#### Install pre-commit hooks
+    
 ```bash
-echo "HUGGINGFACEHUB_API_TOKEN=''" > .env
-docker-compose up
+pip install pre-commit
+pre-commit install
 ```
+
+#### Set up other components
+
+The project is composed of the following components with their respective README.md:
+
+- `terraform/` - Manages the infrastructure
+- `react_frontend/` - Frontend with my CV and UI for future projects (Climate Machine, Word Vapor, etc...)
+- `backend/` - Backend with a REST API for future projects (Climate Machine, Word Vapor, etc...)
+- `azureml` - Machine Learning project leveragin Azure ML, building a multi-language LLM for Word Vapor.
