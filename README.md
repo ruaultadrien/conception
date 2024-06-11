@@ -5,6 +5,8 @@
 
 # conception
 
+This repository is a personal project for learning purposes.
+
 ## Set up your development environment
 
 Set the HUGGINGFACEHUB_API_TOKEN in a .env file then boom.

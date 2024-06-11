@@ -6,7 +6,8 @@ body {
     margin: 0;
     padding: 0;
 }
-.container {
+
+.frame {
     max-width: 800px;
     margin: 50px auto;
     padding: 20px;
@@ -15,36 +16,54 @@ body {
     border-radius: 10px;
 }
 
-.container ul {
+.frame ul {
     margin-top: 0;
     margin-right: 30px;
 }
 
-h1 {
+.title {
     color: #003366;
     text-align: center;
+    font-weight: bold;
+    font-size: 2em;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
 }
-h2 {
+
+.subtitle {
     color: #006699;
     text-align: center;
+    font-weight: bold;
+    font-size: 1.5em;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
 }
-p, li {
+
+p,
+li {
     color: #333;
     line-height: 1.6;
 }
 
-.contact, .links, .skills, .hobbies, .languages {
+.contact,
+.links,
+.skills,
+.hobbies,
+.languages {
     background-color: #f1f1f1;
     padding: 15px;
     border-radius: 5px;
     margin-bottom: 20px;
     margin-top: 20px;
 }
+
 .section-title {
     color: #004080;
     border-bottom: 2px solid #004080;
     padding-bottom: 5px;
     margin-bottom: 10px;
+    font-size: 1.17em;
+    font-weight: bold;
 }
 
 .item-container {
@@ -55,8 +74,10 @@ p, li {
     margin-top: 10px;
 }
 
-.item-container h4 {
+.item-container-title {
     margin: 0;
+    font-size: 16px;
+    font-weight: bold;
 }
 
 .item-container p {
