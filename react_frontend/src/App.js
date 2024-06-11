@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
     return (
-        <div>
+        <div className='background'>
             <div className="frame">
                 <h1 className='title'>Adrien Ruault</h1>
                 <h2 className='subtitle'>Machine Learning Engineer</h2>
