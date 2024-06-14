@@ -175,3 +175,6 @@ secret.tfvars
 
 # Ignore parquet files
 *.parquet
+
+# Ignore node_modules
+node_modules/
