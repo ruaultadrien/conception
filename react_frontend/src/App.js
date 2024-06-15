@@ -8,7 +8,7 @@ import WorkInProgress from './components/WorkInProgress';
 
 function App() {
     return (
-        <Router>
+        <Router >
             <Header />
             <Routes>
                 <Route path="/" element={<CurriculumVitae />} />

@@ -12,6 +12,7 @@ const WorkInProgress = () => {
         backgroundColor: '#f4f4f9',
         color: '#003366',
         textAlign: 'center',
+        fontFamily: '"Albert Sans", sans-serif'
     };
 
     const titleStyle = {
@@ -34,7 +35,7 @@ const WorkInProgress = () => {
         borderRadius: '50%',
         width: '120px',
         height: '120px',
-        animation: 'spin 2s linear infinite'
+        animation: 'spin 4s linear infinite'
     };
 
     const keyframes = `
