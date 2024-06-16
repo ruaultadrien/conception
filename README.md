@@ -26,3 +26,7 @@ The project is composed of the following components with their respective README
 - `react_frontend/` - Frontend with my CV and UI for future projects (Climate Machine, Word Vapor, etc...)
 - `backend/` - Backend with a REST API for future projects (Climate Machine, Word Vapor, etc...)
 - `azureml` - Machine Learning project leveragin Azure ML, building a multi-language LLM for Word Vapor.
+
+## React Frontend
+
+The frontend currently contains my CV and placeholder pages for future projects. The frontend is currently deployed on Vercel.
