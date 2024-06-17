@@ -1,0 +1,16 @@
+triggers:
+- description: null
+  envs: []
+  last_enabled_at: 2024-06-17 15:25:22.564730
+  name: epic potion
+  pipeline_uuid: conception
+  schedule_interval: '@once'
+  schedule_type: time
+  settings: null
+  sla: null
+  start_time: 2024-06-16 15:25:00
+  status: active
+  token: b49506138d274fad8c949ee0846cadbb
+  variables:
+    SEED: 42
+    TEST_RATIO: 0.2
