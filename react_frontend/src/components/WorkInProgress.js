@@ -29,9 +29,9 @@ const WorkInProgress = () => {
     const loaderStyle = {
         marginTop: '1em',
         borderTop: '16px solid #004080',
-        borderRight: '16px solid #f4f4f9',
+        borderRight: '16px solid #fff',
         borderBottom: '16px solid #004080',
-        borderLeft: '16px solid #f4f4f9',
+        borderLeft: '16px solid #fff',
         borderRadius: '50%',
         width: '120px',
         height: '120px',
@@ -43,14 +43,28 @@ const WorkInProgress = () => {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
-  `;
+    `;
+
+    const frame = {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: '30px',
+        boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+        borderRadius: '20px',
+
+        backgroundColor: '#fff',
+    };
 
     return (
         <div style={containerStyle}>
             <style>{keyframes}</style>
-            <h1 style={titleStyle}>Work in Progress</h1>
-            <p style={subtitleStyle}>We're working hard to bring you something amazing. Stay tuned!</p>
-            <div style={loaderStyle}></div>
+            <div style={frame}>
+                <h1 style={titleStyle}>Work in Progress</h1>
+                <p style={subtitleStyle}>We're working hard to bring you something amazing. Stay tuned!</p>
+                <div style={loaderStyle}></div>
+            </div>
         </div>
     );
 };
