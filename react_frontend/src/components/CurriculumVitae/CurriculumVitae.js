@@ -111,7 +111,7 @@ function CurriculumVitae() {
             <section>
                 <h3 className={styles.sectionTitle}>Education</h3>
                 <div style={{ ...innerStyles.itemContainer, ...innerStyles.educationItem }}>
-                    <h4 className={innerStyles.itemContainerTitle}>MSc in Computational Science and Engineering, EPFL - Ecole Polytechnique Fédérale de Lausanne, Lausanne, Switzerland</h4>
+                    <h4 style={innerStyles.itemContainerTitle}>MSc in Computational Science and Engineering, EPFL - Ecole Polytechnique Fédérale de Lausanne, Lausanne, Switzerland</h4>
                     <p className={styles.text}>September 2016 – July 2019 | Grade: 5.44/6</p>
                 </div>
 
@@ -121,9 +121,10 @@ function CurriculumVitae() {
                 </div>
             </section>
 
-            <Contact />
-
-            <LinksSection />
+            <div className={styles.containerContactLinks}>
+                <Contact />
+                <LinksSection />
+            </div>
 
 
             <section>

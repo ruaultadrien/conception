@@ -21,3 +21,18 @@
     line-height: 1.6;
     margin: 0px;
 }
+
+.containerContactLinks {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.contact {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.linksSection {
+    flex: 1;
+}
