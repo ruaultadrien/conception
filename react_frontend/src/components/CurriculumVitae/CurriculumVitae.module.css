@@ -1,0 +1,23 @@
+
+.section {
+    background-color: #f1f1f1;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.sectionTitle {
+    color: #004080;
+    border-bottom: 2px solid #004080;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    font-size: 1.17em;
+    font-weight: bold;
+}
+
+.text {
+    color: #333;
+    line-height: 1.6;
+    margin: 0px;
+}
